@@ -1,0 +1,13 @@
+.env
+
+database/*.db
+database/*.duckdb
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+.vscode/
+.idea/
+.DS_Store
