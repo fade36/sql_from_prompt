@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from safety import check_sql, UnsafeSQLError
+from safety import check_sql, add_limit, UnsafeSQLError
 
 
 class TestCheckSql(unittest.TestCase):
@@ -24,6 +24,10 @@ class TestCheckSql(unittest.TestCase):
             with self.subTest(sql=sql):
                 check_sql(sql)
 
+    def test_add_limit(self):
+        result = add_limit("SELECT * FROM t;")
+        self.assertIn("LIMIT 1000", result)
+        self.assertNotIn(";", result)
     def test_rejected(self):
         bad = [
             "DROP TABLE orders",

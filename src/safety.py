@@ -2,6 +2,8 @@ import sqlglot
 from sqlglot import exp
 from sqlglot.errors import SqlglotError
 
+MAX_ROWS = 1000
+
 class UnsafeSQLError(Exception):
     """SQL is not a single safe SELECT."""
 
@@ -21,3 +23,7 @@ def check_sql(sql):
 
     if not isinstance(statements[0], allowed):
         raise UnsafeSQLError("Only SELECT queries are allowed.")
+
+def add_limit(sql, max_rows=MAX_ROWS):
+    sql = sql.strip().rstrip(";")
+    return f"SELECT * FROM (\n{sql}\n) LIMIT {max_rows}"
