@@ -1,6 +1,7 @@
 import sqlite3
 from pathlib import Path
 import pandas as pd
+from safety import check_sql
 
 path = Path(__file__).resolve().parents[1] / "database" / "datawarehouse.db"
 
@@ -25,7 +26,8 @@ def get_schema():
     return "\n".join(lines)  #to get text, not list
 
 def run_query(sql_request):
-    
+
+    check_sql(sql_request)
     connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
     try:
         res = pd.read_sql_query(sql_request, connection)
