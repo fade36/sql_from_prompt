@@ -1,8 +1,6 @@
 import pandas as pd
 import sqlite3
 from pathlib import Path
-import glob
-import os
 
 def change_name(csv):
     return csv.stem.lower().strip().replace(" ", "_").replace("-","_")
