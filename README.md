@@ -4,7 +4,7 @@ Ask questions about your data in plain English and get the answer as a table.
 An LLM translates the question into SQL; the app validates it and runs it
 on a read-only database connection.
 
-> Status: work in progress.
+> Status: beta.
 
 ## How it works
 
