@@ -20,6 +20,10 @@ def get_schema():
             cols = connection.execute(f'PRAGMA table_info("{table_name}")').fetchall()
             cols_desrciption = ", ".join(f"{col[1]} {col[2]}" for col in cols)
             lines.append(f"{table_name} ({cols_desrciption})")
+            example_rows = connection.execute(f'select * from {table_name} limit 3;').fetchall()
+            rows_description = ", ".join(str(row) for row in example_rows)
+            lines.append(f" rows example: {rows_description}")
+
     finally:
         connection.close()
         

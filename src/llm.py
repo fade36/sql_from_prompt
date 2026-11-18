@@ -12,7 +12,8 @@ def get_sql(question, schema):
     model="gpt-5.4-mini",
     input=f"Description of all tables: {schema}, question: {question}. " 
     "Write only the sql request which answers the question. Return only one SELECT, SQLite dialect, "
-    "without Markdown and formatting. Return only the SQL text, nothing else"
+    "without Markdown and formatting. Return only the SQL text, nothing else. "
+    "Get the example (pattern) of names, variables and columns from tables description, in occasion that question is wrong"
 )
     return response.output_text
 
