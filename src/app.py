@@ -24,12 +24,16 @@ def app():
             with st.spinner("Asking LLM model..."):
                 sql = get_sql(question, get_schema())
 
-            st.code(sql, language="sql")
-            df = run_query(sql)
-            st.dataframe(df)
+            if sql.strip() == "NO_QUERY":
+                st.info("I can only answer questions about the data. ")
+                
+            else:    
+                st.code(sql, language="sql")
+                df = run_query(sql)
+                st.dataframe(df)
 
-            if len(df) >= MAX_ROWS:
-                st.caption(f"The result is limited to {MAX_ROWS} rows.")
+                if len(df) >= MAX_ROWS:
+                    st.caption(f"The result is limited to {MAX_ROWS} rows.")
             
         except DatabaseError: 
             st.error("The generated SQL could not be executed. Try rephrasing the question.")

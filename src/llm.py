@@ -13,7 +13,9 @@ def get_sql(question, schema):
     input=f"Description of all tables: {schema}, question: {question}. " 
     "Write only the sql request which answers the question. Return only one SELECT, SQLite dialect, "
     "without Markdown and formatting. Return only the SQL text, nothing else. "
-    "Get the example (pattern) of names, variables and columns from tables description, in occasion that question is wrong"
+    "Get the example (pattern) of names, variables and columns from tables description,"
+    " in occasion that question is wrong. If the input is not a question that can be answered from these tables "
+    "(for example a greeting, random text, or an unrelated topic), return exactly: NO_QUERY"
 )
     return response.output_text
 
