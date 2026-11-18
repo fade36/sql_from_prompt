@@ -20,7 +20,6 @@ question → schema + prompt → LLM → SQL → safety check → read-only exec
 - `src/safety.py` – checks that the SQL is a single SELECT
 - `src/app.py` – Streamlit interface
 - `tests/` – unit tests for the safety checks
-- `eval/` – test questions with reference SQL and the evaluation script
 
 ## Data
 
@@ -41,10 +40,11 @@ The dataset is licensed under CC BY-NC-SA 4.0 and is intended for non-commercial
 Model output is never trusted. Layers: read-only connection, single-SELECT
 validation, row limit, SQL shown to the user.
 
-## Evaluation
-
-_To be added._
-
 ## Limitations
 
-_To be added._
+- Example rows from the database are sent to the LLM API together with the
+  schema. This is fine for the public Olist dataset, but should be reviewed
+  before using private data.
+- Results are capped at 1000 rows; there is no query timeout yet.
+- Only a single read-only SELECT (including WITH and UNION) is allowed.
+- Answers depend on the chosen model and may vary between runs.
